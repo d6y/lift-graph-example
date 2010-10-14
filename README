@@ -3,12 +3,10 @@ An example of two ways to draw graphs in Lift: using Flot and using the Google C
 The index.html references a Viz snippet, and that snippet contains an example Google Charts
 bar chart [1] and a Flot bar chart [2].
 
-Build and run using SBT [3].
-
-To run:
+Use SBT [3] to build and run:
 
  $ git clone git://github.com/d6y/lift-graph-example.git
- $ cd chartingexample
+ $ cd lift-graph-example
  $ sbt  
  > update
  > ~jetty
