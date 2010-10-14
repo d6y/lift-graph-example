@@ -3,19 +3,14 @@ import de.element34.sbteclipsify._
 
 
 class LiftProject(info: ProjectInfo) extends DefaultWebProject(info) with Eclipsify {
-  val mavenLocal = "Local Maven Repository" at
-  "file://"+Path.userHome+"/.m2/repository"
-
-   val scalatoolsSnapshot = "Scala Tools Snapshot" at
-  "http://scala-tools.org/repo-snapshots/"
-
-  val scalatoolsRelease = "Scala Tools Snapshot" at
-  "http://scala-tools.org/repo-releases/"
+  val mavenLocal = "Local Maven Repository" at  "file://"+Path.userHome+"/.m2/repository"
+  val scalatoolsSnapshot = "Scala Tools Snapshot" at "http://scala-tools.org/repo-snapshots/"
+  val scalatoolsRelease = "Scala Tools Snapshot" at "http://scala-tools.org/repo-releases/"
 
   val liftVersion = "2.1"
 
   override def libraryDependencies = Set(
-    "net.liftweb" %% "lift-webkit" % liftVersion % "compile->default",
+    "net.liftweb" %% "lift-webkit" % liftVersion % "compile->default" withSources(),
     "net.liftweb" %% "lift-testkit" % liftVersion % "compile->default",
     "net.liftweb" %% "lift-widgets" % liftVersion % "compile->default",
     "org.mortbay.jetty" % "jetty" % "6.1.22" % "test->default",
