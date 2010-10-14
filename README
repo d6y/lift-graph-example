@@ -7,7 +7,7 @@ Build and run using SBT [3].
 
 To run:
 
- $ git clone
+ $ git clone git://github.com/d6y/lift-graph-example.git
  $ cd chartingexample
  $ sbt  
  > update
