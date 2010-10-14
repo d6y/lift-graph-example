@@ -1,8 +1,8 @@
-
-
 import sbt._
+import de.element34.sbteclipsify._
 
-class LiftProject(info: ProjectInfo) extends DefaultWebProject(info) {
+
+class LiftProject(info: ProjectInfo) extends DefaultWebProject(info) with Eclipsify {
   val mavenLocal = "Local Maven Repository" at
   "file://"+Path.userHome+"/.m2/repository"
 
