@@ -11,13 +11,13 @@ import JE._
 
 class Viz {
 
+  val data = List(50,80) // range 0-100
+  val bar_labels = List("Fred", "Bert")
+
   // -- GOOGLE CHARTS EXAMPLE: ---------------------------------------------
 
   val width = 300
   val height = 225
-
-  val data = List(50,80) // range 0-100
-  val bar_labels = List("Fred", "Bert")
 
   def googleUrl = "http://chart.apis.google.com/chart?" + List(
         "chxt=x,y", 
@@ -34,22 +34,21 @@ class Viz {
 
   def flot(xhtml: NodeSeq) = {
     
-    val data_values: List[(Double,Double)] = List( (10d, 42d)  )
-
-    val data_to_plot = new FlotSerie() {
-        override val data = data_values
-        override val label = Full("hi")
+    // One FlotSerie for each bar
+    val data_to_plot = for ( (y,x) <- data zipWithIndex ) yield new FlotSerie() {
+        override val data : List[(Double,Double)] = (x.toDouble, y.toDouble) :: Nil
+        override val label = Full( bar_labels(x) ) 
     } 
 
     val options:FlotOptions = new FlotOptions () {
-        override val series = Full( Map( "bars" -> JsObj("show"->true, "barWidth"->1) ) )
+        override val series = Full( Map( "bars" -> JsObj("show"->true, "barWidth"->0.5) ) )
        
         override val xaxis = Full( new FlotAxisOptions() {
-            override def min = Some(1d)
-            override def max = Some(20d)
+            override def min = Some(0d)
+            override def max = Some(data.length * 1d)
         })
     }
 
-    Flot.render ( "graph_area", List(data_to_plot), options, Flot.script(xhtml))
+    Flot.render ( "graph_area", data_to_plot, options, Flot.script(xhtml))
   }
 }
