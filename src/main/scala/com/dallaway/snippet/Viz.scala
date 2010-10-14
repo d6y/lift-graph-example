@@ -9,44 +9,46 @@ import net.liftweb.common._
 import JE._
 
 
-
 class Viz {
 
-
-  // GOOGLE CHARTS EXAMPLE:
+  // -- GOOGLE CHARTS EXAMPLE: ---------------------------------------------
 
   val width = 300
   val height = 225
 
-  val data = List(10,20)
-  val people = List("Fred", "Bert")
+  val data = List(50,80) // range 0-100
+  val bar_labels = List("Fred", "Bert")
 
-  private def googleUrl = "http://chart.apis.google.com/chart?" + List("chxt=x,y", "chxl=0:|foo|baz", "chs=%dx%d".format(width,height), "cht=bvg", "chco=A2C180", "chd=t:10,20").mkString("&")
+  def googleUrl = "http://chart.apis.google.com/chart?" + List(
+        "chxt=x,y", 
+        "chxl=0:|" + bar_labels.mkString("|"), 
+        "chs=%dx%d".format(width,height), 
+        "cht=bvg", 
+        "chco=A2C180", 
+        "chd=t:"+data.mkString(",") ).mkString("&")
 
   def google(xhtml: NodeSeq) = <img src={googleUrl} width={width} height={height} alt="graph"/>
                                                  
 
-  // FLOT EXAMPLE:
+  // -- FLOT EXAMPLE: -----------------------------------------------------
 
   def flot(xhtml: NodeSeq) = {
+    
     val data_values: List[(Double,Double)] = List( (10d, 42d)  )
 
     val data_to_plot = new FlotSerie() {
         override val data = data_values
-		override val label = Full("hi")
-	//	override val label = List("ouch")
+        override val label = Full("hi")
     } 
 
-	val options:FlotOptions = new FlotOptions () {
-  		override val series = Full( Map( "bars" -> JsObj("show"->true, "barWidth"->1) ) )
+    val options:FlotOptions = new FlotOptions () {
+        override val series = Full( Map( "bars" -> JsObj("show"->true, "barWidth"->1) ) )
        
-		override val xaxis = Full( new FlotAxisOptions() {
-       		override def min = Some(1d)
-			override def max = Some(20d)
-		})
- }
-
-
+        override val xaxis = Full( new FlotAxisOptions() {
+            override def min = Some(1d)
+            override def max = Some(20d)
+        })
+    }
 
     Flot.render ( "graph_area", List(data_to_plot), options, Flot.script(xhtml))
   }
