@@ -1,0 +1,21 @@
+An example of two ways to draw graphs in Lift: using Flot and using the Google Charts API.
+
+The index.html references a Viz snippet, and that snippet contains an example Google Charts
+bar chart [1] and a Flot bar chart [2].
+
+Build and run using SBT [3].
+
+To run:
+
+ $ git clone
+ $ cd chartingexample
+ $ sbt  
+ > update
+ > ~jetty
+
+...and then hit http://localhost:8080/
+
+References:
+ 1. http://code.google.com/apis/chart/
+ 2. https://www.assembla.com/wiki/show/liftweb/Flot
+ 3. http://code.google.com/p/simple-build-tool/
