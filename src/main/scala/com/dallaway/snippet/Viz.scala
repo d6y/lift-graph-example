@@ -47,8 +47,12 @@ class Viz {
             override def min = Some(0d)
             override def max = Some(data.length * 1d)
         })
+        
+        override def grid = Full( new FlotGridOptions() {
+        	override def hoverable = Full(true)
+        })
     }
-
-    Flot.render ( "graph_area", data_to_plot, options, Flot.script(xhtml))
+  
+    Flot.render("graph_area", data_to_plot, options, Flot.script(xhtml))
   }
 }
