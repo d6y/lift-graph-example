@@ -13,11 +13,25 @@ class Viz {
 
   val data = List(50,80) // range 0-100
   val bar_labels = List("Fred", "Bert")
+  val generatedValue = new java.util.Random nextInt // generates an arbitary value
+  val flagValue = generatedValue % 2 // Zero or One
 
   // -- GOOGLE CHARTS EXAMPLE: ---------------------------------------------
 
-  val width = 300
+  val width = 600
   val height = 225
+
+def googleOMeter(data: Int, bar_label: String) = "http://chart.apis.google.com/chart?" + List(
+    "chtt=Meter+Reading+for+@" + bar_label,
+    "chts=000000,10",
+    "chxt=x,y",
+    "chxl=0:|Low|High",
+    "chxt=y",
+    "chs=300x150",
+    "cht=gm",
+    "chd=t:" + data,
+    //    "chdl=" + bar_label,
+    "chl=data").mkString("&") // returns google o meter chart
 
   def googleUrl = "http://chart.apis.google.com/chart?" + List(
         "chxt=x,y", 
@@ -28,6 +42,9 @@ class Viz {
         "chd=t:"+data.mkString(",") ).mkString("&")
 
   def google(xhtml: NodeSeq) = <img src={googleUrl} width={width} height={height} alt="graph"/>
+
+ def googleOMeterChart(xhtml: NodeSeq) = <img src={googleOMeter(data(flagValue), bar_labels(flagValue))} width={width} height={height} alt="graph"/>
+
                                                  
 
   // -- FLOT EXAMPLE: -----------------------------------------------------
