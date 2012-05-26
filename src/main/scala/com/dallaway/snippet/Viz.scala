@@ -27,7 +27,7 @@ class Viz {
         "chco=A2C180", 
         "chd=t:"+data.mkString(",") ).mkString("&")
 
-  def google(xhtml: NodeSeq) = <img src={googleUrl} width={width} height={height} alt="graph"/>
+  def google(xhtml: NodeSeq) = <img src={googleUrl} width={width.toString} height={height.toString} alt="graph"/>
                                                  
 
   // -- FLOT EXAMPLE: -----------------------------------------------------
